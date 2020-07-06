@@ -55,9 +55,9 @@
             } else {
                 NSLog(@"User logged in successfully");
                 [self performSegueWithIdentifier:@"LoggedSegue" sender:nil];
-//                UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//                UIViewController *vc = [sb instantiateViewControllerWithIdentifier:@"InstagramNavi"];
-//                [[[[UIApplication sharedApplication] delegate] window] setRootViewController:vc];
+                //                UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                //                UIViewController *vc = [sb instantiateViewControllerWithIdentifier:@"InstagramNavi"];
+                //                [[[[UIApplication sharedApplication] delegate] window] setRootViewController:vc];
             }
         }];
     }

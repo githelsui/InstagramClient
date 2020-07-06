@@ -10,6 +10,7 @@
 #import "LoginController.h"
 #import "AppDelegate.h"
 #import "SceneDelegate.h"
+#import <Parse/Parse.h>
 
 @interface TimelineViewController ()
 
@@ -27,6 +28,9 @@
     LoginController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginController"];
     SceneDelegate *sceneDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
     sceneDelegate.window.rootViewController = loginViewController;
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+        // PFUser.current() will now be nil
+    }];
 }
 
 /*

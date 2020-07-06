@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import "TimelineViewController.h"
+#import "SceneDelegate.h"
 
 @interface AppDelegate ()
 
@@ -17,11 +19,11 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-     ParseClientConfiguration *configuration = [ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
-         configuration.applicationId = @"myAppId";
-         configuration.server = @"https://gith-igparse-server.herokuapp.com/parse";
-       }];
-       [Parse initializeWithConfiguration:configuration];
+    ParseClientConfiguration *configuration = [ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+        configuration.applicationId = @"myAppId";
+        configuration.server = @"https://gith-igparse-server.herokuapp.com/parse";
+    }];
+    [Parse initializeWithConfiguration:configuration];
     return YES;
 }
 

@@ -64,10 +64,10 @@
             </objects>
             <point key="canvasLocation" x="1497" y="-545"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Menu Bar Controller-->
         <scene sceneID="fvL-Nf-vh6">
             <objects>
-                <tabBarController id="9uC-SY-tBm" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MenuBarController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9uC-SY-tBm" customClass="MenuBarController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="uck-XP-B7Z"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="j2x-QB-aHz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -86,7 +86,7 @@
         <scene sceneID="nR8-Ii-qcJ">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aJE-Jy-xhI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <viewController title="Instagram" id="pEm-VU-Bbd" customClass="TimelineViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TimelineViewController" title="Instagram" id="pEm-VU-Bbd" customClass="TimelineViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7DG-26-VTV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -117,9 +117,10 @@
         <scene sceneID="TZ8-9r-c7F">
             <objects>
                 <navigationController storyboardIdentifier="TimelineNavi" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ca8-LG-JhI" customClass="TimelineNavi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" selectedImage="feed_tab" id="dod-Qg-tol"/>
+                    <tabBarItem key="tabBarItem" title="" image="feed_tab" id="eY3-If-5pG"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="NnR-Wk-2SJ"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Jds-fH-sjp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
