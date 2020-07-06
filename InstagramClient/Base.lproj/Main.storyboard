@@ -10,7 +10,7 @@
         <!--Login Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="LoginController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="Log">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -57,17 +57,36 @@
                     <connections>
                         <outlet property="passwordField" destination="Sga-df-ivu" id="oum-I1-UFL"/>
                         <outlet property="usernameField" destination="qF3-X9-siQ" id="Dsf-Lw-dFM"/>
-                        <segue destination="ca8-LG-JhI" kind="show" identifier="LoggedSegue" id="ksx-bI-9Fz"/>
+                        <segue destination="9uC-SY-tBm" kind="show" identifier="LoggedSegue" id="jTI-k0-ced"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="131.8840579710145" y="137.94642857142856"/>
+            <point key="canvasLocation" x="1497" y="-545"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="fvL-Nf-vh6">
+            <objects>
+                <tabBarController id="9uC-SY-tBm" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="uck-XP-B7Z"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="j2x-QB-aHz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="ca8-LG-JhI" kind="relationship" relationship="viewControllers" id="8Az-sY-AZR"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KrM-wj-YDG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1497" y="175"/>
         </scene>
         <!--Instagram-->
         <scene sceneID="nR8-Ii-qcJ">
             <objects>
-                <viewController title="Instagram" id="pEm-VU-Bbd" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aJE-Jy-xhI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController title="Instagram" id="pEm-VU-Bbd" customClass="TimelineViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7DG-26-VTV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -83,16 +102,22 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="Q8T-2r-AXr"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Instagram" id="AgE-e3-Unj"/>
+                    <navigationItem key="navigationItem" title="Title" id="hfT-sg-fpZ">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="TBg-wU-F8B">
+                            <connections>
+                                <action selector="logoutTapped:" destination="pEm-VU-Bbd" id="556-fi-e72"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aJE-Jy-xhI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2121.739130434783" y="137.94642857142856"/>
+            <point key="canvasLocation" x="654" y="1589"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Timeline Navi-->
         <scene sceneID="TZ8-9r-c7F">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ca8-LG-JhI" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="TimelineNavi" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ca8-LG-JhI" customClass="TimelineNavi" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" selectedImage="feed_tab" id="dod-Qg-tol"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="NnR-Wk-2SJ"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Jds-fH-sjp">
@@ -106,7 +131,10 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M7O-U1-M3c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1211.5942028985507" y="137.94642857142856"/>
+            <point key="canvasLocation" x="654" y="925"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="feed_tab" width="25" height="25"/>
+    </resources>
 </document>
