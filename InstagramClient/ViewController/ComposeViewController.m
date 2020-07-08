@@ -59,7 +59,7 @@
     
     // Get the image captured by the UIImagePickerController
     UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
-    CGSize size = CGSizeMake(200.0, 200.0);
+    CGSize size = CGSizeMake(400.0, 400.0);
     UIImage *editedImage = [self resizeImage:originalImage withSize:size];
     // Do something with the images (based on your use case)
     self.imagePost = editedImage;

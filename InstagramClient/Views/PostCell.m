@@ -25,14 +25,8 @@
 - (void)setCell{
     self.captionView.text = self.post.caption;
     PFUser *user = self.post.author;
-    if (user != nil) {
-        [user fetchIfNeeded];
-        self.usernameLabel.text = user[@"username"];
-        NSLog(@"%s", "not nil");
-    } else {
-        self.usernameLabel.text = @"🤖";
-        NSLog(@"%s", "it is nil");
-    }
+    [user fetchIfNeeded];
+    self.usernameLabel.text = user[@"username"];
     self.iconView.layer.cornerRadius = 20;
     [self.post.image getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
         if (!error) {
