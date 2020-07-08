@@ -10,10 +10,7 @@
 #import "Post.h"
 
 @implementation PostCell
-//@property (weak, nonatomic) IBOutlet UIImageView *postView;
-//@property (weak, nonatomic) IBOutlet UILabel *captionView;
-//@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
-//@property (weak, nonatomic) IBOutlet UIImageView *iconView;
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

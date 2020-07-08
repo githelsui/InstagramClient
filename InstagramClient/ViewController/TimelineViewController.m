@@ -13,10 +13,12 @@
 #import <Parse/Parse.h>
 #import "PostCell.h"
 #import "Post.h"
+#import "DetailViewController.h"
 
 @interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *posts;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -25,9 +27,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(fetchPosts) userInfo:nil repeats:true];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    [self.tableView reloadData];
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
+}
+
+- (void)fetchPosts{
+    PFQuery *query = [PFQuery queryWithClassName:@"Post"];
+    //    [query whereKey:@"likesCount" greaterThan:@0];
+    query.limit = 20;
+    [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
+        if (posts != nil) {
+            self.posts = posts;
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+        [self.tableView reloadData];
+        [self.refreshControl endRefreshing];
+    }];
 }
 
 - (IBAction)logoutTapped:(id)sender {
@@ -45,21 +65,25 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
+    PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
     Post *post = self.posts[indexPath.row];
     cell.post = post;
     [cell setCell];
     return cell;
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    UITableViewCell *tappedCell = sender;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+    Post *post = self.posts[indexPath.row];
+    NSLog(@"post being passed %@", post);
+    DetailViewController *detailController = [segue destinationViewController];
+    detailController.post = post;
+}
+
 
 @end

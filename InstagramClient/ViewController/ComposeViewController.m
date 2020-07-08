@@ -88,19 +88,19 @@
         UIImage *image = self.imagePost;
         Post *postOrig = [Post new];
         postOrig.caption = caption;
-        // PFBooleanResultBlock = void (^)(BOOL, NSError *_Nullable _strong)
-        //        [postOrig postUserImage:image withCaption:caption withCompletion:(PFBooleanResultBlock myResult){
-        //            if(myResult){
-        //
+        //         PFBooleanResultBlock: void (^)(BOOL, NSError *_Nullable _strong)
+        //        [postOrig postUserImage:image withCaption:caption withCompletion:^(BOOL succeeded, NSError *error) {
+        //            if (error) {
+        //                NSLog(@"Not working");
         //            } else {
-        //
+        //                NSLog(@"Working!");
         //            }
         //        }];
         
         PFObject *post = [PFObject objectWithClassName:@"Post"];
         post[@"caption"] = self.captionView.text;
         post[@"image"] = self.imagePost;
-        [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+        [postOrig saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
             if (succeeded) {
                 NSLog(@"The post was saved!");
             } else {
