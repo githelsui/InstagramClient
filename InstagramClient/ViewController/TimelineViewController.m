@@ -31,13 +31,14 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.refreshControl = [[UIRefreshControl alloc] init];
-//    [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
+    [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
 }
 
 - (void)fetchPosts{
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
     //    [query whereKey:@"likesCount" greaterThan:@0];
+    [query orderByDescending:@"createdAt"];
     query.limit = 20;
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
         if (posts != nil) {
@@ -80,10 +81,10 @@
     UITableViewCell *tappedCell = sender;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
     if ([segue.identifier isEqualToString:@"DetailSegue"]){
-    Post *post = self.posts[indexPath.row];
-    NSLog(@"post being passed %@", post);
-    DetailViewController *detailController = [segue destinationViewController];
-    detailController.post = post;
+        Post *post = self.posts[indexPath.row];
+        NSLog(@"post being passed %@", post);
+        DetailViewController *detailController = [segue destinationViewController];
+        detailController.post = post;
     }
 }
 
