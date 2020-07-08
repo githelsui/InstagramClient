@@ -24,7 +24,7 @@
 
 - (void)setCell{
     self.captionView.text = self.post.caption;
-    self.usernameLabel.text = self.post.author[@"name"];
+//    self.usernameLabel.text = self.post.author[@"username"];
 //    [self.postView setImage:self.post.image];
     self.iconView.layer.cornerRadius = 15;
 }

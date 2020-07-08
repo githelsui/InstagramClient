@@ -31,7 +31,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.refreshControl = [[UIRefreshControl alloc] init];
-    [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
+//    [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
 }
 
@@ -79,10 +79,12 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     UITableViewCell *tappedCell = sender;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+    if ([segue.identifier isEqualToString:@"DetailSegue"]){
     Post *post = self.posts[indexPath.row];
     NSLog(@"post being passed %@", post);
     DetailViewController *detailController = [segue destinationViewController];
     detailController.post = post;
+    }
 }
 
 

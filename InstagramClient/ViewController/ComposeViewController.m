@@ -85,26 +85,12 @@
         [self showAlert];
     } else {
         NSString *caption = self.captionView.text;
-        UIImage *image = self.imagePost;
-        Post *postOrig = [Post new];
-        postOrig.caption = caption;
-        //         PFBooleanResultBlock: void (^)(BOOL, NSError *_Nullable _strong)
-        //        [postOrig postUserImage:image withCaption:caption withCompletion:^(BOOL succeeded, NSError *error) {
-        //            if (error) {
-        //                NSLog(@"Not working");
-        //            } else {
-        //                NSLog(@"Working!");
-        //            }
-        //        }];
-        
-        PFObject *post = [PFObject objectWithClassName:@"Post"];
-        post[@"caption"] = self.captionView.text;
-        post[@"image"] = self.imagePost;
-        [postOrig saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
-            if (succeeded) {
-                NSLog(@"The post was saved!");
+        UIImage *imageToPost = self.imagePost;
+        [Post postUserImage:imageToPost withCaption:caption withCompletion:^(BOOL succeeded, NSError *error) {
+            if (error) {
+                NSLog(@"Not working");
             } else {
-                NSLog(@"Problem saving message: %@", error.localizedDescription);
+                NSLog(@"Working!");
             }
         }];
         [self dismissViewControllerAnimated:true completion:nil];

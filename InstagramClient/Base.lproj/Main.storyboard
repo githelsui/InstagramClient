@@ -356,7 +356,7 @@
                                             <outlet property="imageView" destination="wH6-2f-13S" id="oDH-OP-JaF"/>
                                             <outlet property="postView" destination="wH6-2f-13S" id="5y0-SZ-3Mx"/>
                                             <outlet property="usernameLabel" destination="ypB-VA-i7i" id="gUG-ae-Tli"/>
-                                            <segue destination="1S5-sm-V0Q" kind="show" id="Yli-S3-HLd"/>
+                                            <segue destination="1S5-sm-V0Q" kind="show" identifier="DetailSegue" id="Yli-S3-HLd"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
