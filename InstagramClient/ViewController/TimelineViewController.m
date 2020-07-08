@@ -11,8 +11,12 @@
 #import "AppDelegate.h"
 #import "SceneDelegate.h"
 #import <Parse/Parse.h>
+#import "PostCell.h"
+#import "Post.h"
 
-@interface TimelineViewController ()
+@interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSArray *posts;
 
 @end
 
@@ -20,7 +24,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.tableView reloadData];
 }
 
 - (IBAction)logoutTapped:(id)sender {
@@ -31,6 +38,18 @@
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         // PFUser.current() will now be nil
     }];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.posts.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
+    Post *post = self.posts[indexPath.row];
+    cell.post = post;
+    [cell setCell];
+    return cell;
 }
 
 /*
