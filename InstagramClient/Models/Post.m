@@ -6,6 +6,7 @@
 //  Copyright © 2020 Githel Lynn Suico. All rights reserved.
 //
 #import "Post.h"
+#import "DateTools.h"
 
 @implementation Post
 
@@ -29,7 +30,7 @@
     newPost.caption = caption;
     newPost.likeCount = @(0);
     newPost.commentCount = @(0);
-    
+    [newPost setDates: newPost];
     [newPost saveInBackgroundWithBlock: completion];
 }
 
@@ -47,6 +48,20 @@
     }
     
     return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
+}
+
+- (void)setDates: (Post *)post{
+    NSDate *createdAt = post.createdAt;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"E MMM d HH:mm";
+    NSString *date = [formatter stringFromDate:createdAt];
+    formatter.dateStyle = NSDateFormatterShortStyle;
+    formatter.timeStyle = NSDateFormatterShortStyle;
+    self.fullDate = date;
+    NSTimeInterval seconds = -[createdAt timeIntervalSinceNow];
+    NSDate *timeAgo = [NSDate dateWithTimeIntervalSinceNow:seconds];
+    NSString *timeAgoString = timeAgo.shortTimeAgoSinceNow;
+    self.timeAgo = timeAgoString;
 }
 
 @end

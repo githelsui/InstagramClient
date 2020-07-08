@@ -8,6 +8,7 @@ target 'InstagramClient' do
   # Pods for InstagramClient
         pod 'Parse'
         pod 'AFNetworking'
+	pod 'DateTools'
   target 'InstagramClientTests' do
     inherit! :search_paths
     # Pods for testing

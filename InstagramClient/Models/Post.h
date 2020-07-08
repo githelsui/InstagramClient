@@ -20,9 +20,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) PFFileObject *image;
 @property (nonatomic, strong) NSNumber *likeCount;
 @property (nonatomic, strong) NSNumber *commentCount;
+@property (nonatomic, strong) NSString *timeAgo;
+@property (nonatomic, strong) NSString *fullDate;
 
 + (void) postUserImage: ( UIImage * _Nullable )image withCaption: ( NSString * _Nullable )caption withCompletion: (PFBooleanResultBlock  _Nullable)completion;
-
+- (void)setDates: (Post *)post;
 @end
 
 NS_ASSUME_NONNULL_END
