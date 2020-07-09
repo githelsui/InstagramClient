@@ -15,11 +15,12 @@
 #import "Post.h"
 #import "DetailViewController.h"
 
-@interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *posts;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
-
+@property (nonatomic) BOOL isMoreDataLoading;
+@property (nonatomic) int queryAmount;
 @end
 
 @implementation TimelineViewController
@@ -27,6 +28,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.isMoreDataLoading = NO;
+    self.queryAmount = 2;
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(fetchPosts) userInfo:nil repeats:true];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -39,7 +42,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
     //    [query whereKey:@"likesCount" greaterThan:@0];
     [query orderByDescending:@"createdAt"];
-    query.limit = 20;
+    query.limit = self.queryAmount;
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
         if (posts != nil) {
             self.posts = posts;
@@ -71,6 +74,18 @@
     cell.post = post;
     [cell setCell];
     return cell;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if(!self.isMoreDataLoading){
+        int scrollViewContentHeight = self.tableView.contentSize.height;
+        int scrollOffsetThreshold = scrollViewContentHeight - self.tableView.bounds.size.height;
+        if(scrollView.contentOffset.y > scrollOffsetThreshold && self.tableView.isDragging) {
+            self.isMoreDataLoading = YES;
+            self.queryAmount += 20;
+            [self fetchPosts];
+        }
+    }
 }
 
 
