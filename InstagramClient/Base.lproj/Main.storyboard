@@ -173,13 +173,22 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="TVr-Bp-012">
+                                <rect key="frame" x="62.666666666666657" y="265" width="249.99999999999997" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="3se-78-nqf"/>
+                                    <constraint firstAttribute="height" constant="250" id="aZM-0y-8Pf"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="C1l-hf-cz2" firstAttribute="top" secondItem="lJy-ur-dcY" secondAttribute="top" constant="28" id="2Cn-nF-pr4"/>
+                            <constraint firstItem="TVr-Bp-012" firstAttribute="centerY" secondItem="lJy-ur-dcY" secondAttribute="centerY" id="A2k-t1-rwA"/>
                             <constraint firstItem="lJy-ur-dcY" firstAttribute="bottom" secondItem="i24-bJ-Vmb" secondAttribute="bottom" constant="29" id="WZk-cc-AJ3"/>
                             <constraint firstItem="i24-bJ-Vmb" firstAttribute="leading" secondItem="lJy-ur-dcY" secondAttribute="leading" constant="33" id="e5e-LP-N8T"/>
                             <constraint firstItem="lJy-ur-dcY" firstAttribute="trailing" secondItem="i24-bJ-Vmb" secondAttribute="trailing" constant="34" id="edm-iJ-cbB"/>
+                            <constraint firstItem="TVr-Bp-012" firstAttribute="centerX" secondItem="lJy-ur-dcY" secondAttribute="centerX" id="hLs-Jk-MhE"/>
                             <constraint firstItem="i24-bJ-Vmb" firstAttribute="top" secondItem="C1l-hf-cz2" secondAttribute="bottom" constant="33" id="hWr-dh-N5b"/>
                             <constraint firstItem="lJy-ur-dcY" firstAttribute="trailing" secondItem="C1l-hf-cz2" secondAttribute="trailing" constant="34" id="rxt-5e-r5w"/>
                             <constraint firstItem="C1l-hf-cz2" firstAttribute="leading" secondItem="lJy-ur-dcY" secondAttribute="leading" constant="33" id="vsO-fT-lCr"/>
@@ -199,6 +208,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="TVr-Bp-012" id="uVc-ws-pJf"/>
                         <outlet property="captionView" destination="26Q-O5-GXV" id="177-bw-fzf"/>
                         <outlet property="imageView" destination="C1l-hf-cz2" id="W0p-jD-ZMb"/>
                         <outlet property="msgLabel" destination="iYp-xm-ONR" id="SC9-wH-ibf"/>

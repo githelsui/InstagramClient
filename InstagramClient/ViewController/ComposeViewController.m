@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *captionView;
 @property (weak, nonatomic) IBOutlet UILabel *msgLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, strong) UIImage *imagePost;
 @end
 
@@ -21,6 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //    [self.activityIndicator startAnimating];
 }
 
 - (IBAction)tapCamera:(id)sender {
@@ -81,19 +83,20 @@
     UIImage *placeholder = [UIImage imageNamed: @"image_placeholder.png"];
     UIImage *current = self.imageView.image;
     if([self compareImg:placeholder isEqualTo:current]){
-        NSLog(@"Canot post empty image");
         [self showAlert];
     } else {
         NSString *caption = self.captionView.text;
         UIImage *imageToPost = self.imagePost;
+        [self.activityIndicator startAnimating];
         [Post postUserImage:imageToPost withCaption:caption withCompletion:^(BOOL succeeded, NSError *error) {
             if (error) {
                 NSLog(@"Not working");
             } else {
                 NSLog(@"Working!");
+                [self dismissViewControllerAnimated:true completion:nil];
             }
+            [self.activityIndicator stopAnimating];
         }];
-        [self dismissViewControllerAnimated:true completion:nil];
     }
 }
 
