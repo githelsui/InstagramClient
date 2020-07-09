@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *postView;
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UIButton *likeButton;
+@property (weak, nonatomic) IBOutlet UILabel *likesLabel;
 
 @end
 
@@ -21,6 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self updateButtons];
     [self setDetails];
 }
 
@@ -32,6 +35,7 @@
     [user fetchIfNeeded];
     self.usernameLabel.text = user[@"username"];
     self.iconView.layer.cornerRadius = 20;
+    self.likesLabel.text = [NSString stringWithFormat:@"%@ Likes", self.post.likeCount];
     [self.post.image getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
         if (!error) {
             UIImage *image = [UIImage imageWithData:data];
@@ -40,6 +44,64 @@
             NSLog(@"Print error!!! %@", error.localizedDescription);
         }
     }];
+}
+
+- (void)updateButtons{
+    UIImage *favIcon;
+    if(self.post.likedByUser){
+        favIcon = [UIImage imageNamed:@"black-heart.png"];
+    } else {
+        favIcon = [UIImage imageNamed:@"heart.png"];
+    }
+    [self.likeButton setImage:favIcon forState:UIControlStateNormal];
+}
+
+- (void)likePost{
+    self.post.likeCount = @([self.post.likeCount intValue] + [@1 intValue]);
+    self.post.likedByUser = YES;
+    [self.post saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+        if (succeeded) {
+            NSLog(@"The message was saved!");
+            UIImage *favIcon =  [UIImage imageNamed:@"black-heart.png"];
+            [self.likeButton setImage:favIcon forState:UIControlStateNormal];
+            [self setDetails];
+        } else {
+            NSLog(@"Problem saving message: %@", error.localizedDescription);
+            if(self.post.likeCount > 0)
+                self.post.likeCount = @([self.post.likeCount intValue] - [@1 intValue]);
+            self.post.likedByUser = NO;
+        }
+    }];
+}
+
+- (void)unlikePost{
+    self.post.likeCount = @([self.post.likeCount intValue] - [@1 intValue]);
+    self.post.likedByUser = NO;
+    [self.post saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+        if (succeeded) {
+            NSLog(@"The message was saved!");
+            UIImage *favIcon =  [UIImage imageNamed:@"heart.png"];
+            [self.likeButton setImage:favIcon forState:UIControlStateNormal];
+            [self setDetails];
+        } else {
+            NSLog(@"Problem saving message: %@", error.localizedDescription);
+            self.post.likeCount = @([self.post.likeCount intValue] + [@1 intValue]);
+            self.post.likedByUser = YES;
+        }
+    }];
+}
+
+- (IBAction)likeTapped:(id)sender {
+    if(self.post.likedByUser){
+        [self unlikePost];
+    } else {
+        [self likePost];
+    }
+}
+
+
+- (IBAction)commentTapped:(id)sender {
+    
 }
 
 /*
