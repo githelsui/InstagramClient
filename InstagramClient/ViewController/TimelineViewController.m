@@ -40,7 +40,6 @@
 
 - (void)fetchPosts{
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
-    //    [query whereKey:@"likesCount" greaterThan:@0];
     [query orderByDescending:@"createdAt"];
     query.limit = self.queryAmount;
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
@@ -59,9 +58,7 @@
     LoginController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginController"];
     SceneDelegate *sceneDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
     sceneDelegate.window.rootViewController = loginViewController;
-    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
-        // PFUser.current() will now be nil
-    }];
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {}];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

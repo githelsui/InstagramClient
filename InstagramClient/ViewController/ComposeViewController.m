@@ -22,7 +22,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //    [self.activityIndicator startAnimating];
 }
 
 - (IBAction)tapCamera:(id)sender {

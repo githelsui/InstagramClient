@@ -36,6 +36,12 @@
             NSLog(@"Print error!!! %@", error.localizedDescription);
         }
     }];
+    [user[@"icon"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+        if (!error) {
+            UIImage *image = [UIImage imageWithData:data];
+            self.iconView.image = image;
+        }
+    }];
 }
 
 @end

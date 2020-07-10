@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *fullDate;
 @property (nonatomic) BOOL likedByUser; 
 
++ (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image;
 + (void) postUserImage: ( UIImage * _Nullable )image withCaption: ( NSString * _Nullable )caption withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 - (void)setDates: (Post *)post;
 @end
