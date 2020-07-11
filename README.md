@@ -39,16 +39,17 @@ The following **additional** features are implemented:
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1. Autolayout
+2. Parse Relations!
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
-GIF created with [LiceCap](http://www.cockos.com/licecap/).
+<img src="gifs/1.gif" width="250" height="497"/>
+<img src="gifs/2.gif" width="250" height="497"/>
+<img src="gifs/3.gif" width="250" height="497"/>
+<img src="gifs/4.gif" width="250" height="497"/>
 
 ## Credits
 
