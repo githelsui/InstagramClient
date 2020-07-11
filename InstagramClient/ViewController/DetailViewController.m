@@ -44,6 +44,18 @@
             NSLog(@"Print error!!! %@", error.localizedDescription);
         }
     }];
+    [self setIcon];
+}
+
+- (void)setIcon{
+    PFUser *user = self.post.author;
+    [user fetchIfNeeded];
+    [user[@"icon"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+        if (!error) {
+            UIImage *image = [UIImage imageWithData:data];
+            self.iconView.image = image;
+        }
+    }];
 }
 
 - (void)updateButtons{
