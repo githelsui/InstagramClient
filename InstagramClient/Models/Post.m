@@ -6,7 +6,6 @@
 //  Copyright © 2020 Githel Lynn Suico. All rights reserved.
 //
 #import "Post.h"
-#import "DateTools.h"
 
 @implementation Post
 
@@ -61,11 +60,10 @@
     NSString *date = [formatter stringFromDate:createdAt];
     formatter.dateStyle = NSDateFormatterShortStyle;
     formatter.timeStyle = NSDateFormatterShortStyle;
+    formatter.dateFormat = @"E MMM d";
+    NSString *shortDate = [formatter stringFromDate:createdAt];
     self.fullDate = date;
-    NSTimeInterval seconds = -[createdAt timeIntervalSinceNow];
-    NSDate *timeAgo = [NSDate dateWithTimeIntervalSinceNow:seconds];
-    NSString *timeAgoString = timeAgo.shortTimeAgoSinceNow;
-    self.timeAgo = timeAgoString;
+    self.timeAgo = shortDate;
 }
 
 @end
